@@ -1,0 +1,10 @@
+.loading-container {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    align-items: center;
+    width: 100%;
+    > img {
+        height: 300px;
+    }
+}
