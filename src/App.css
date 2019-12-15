@@ -153,6 +153,11 @@ span.q {
 @media(max-width: 678px) {
   .masonry-container {
     columns: 1 200px;
+    /* scroll-snap-type: y mandatory;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+    height: 100vh;
+    width: 100vw; */
   }
 }
 
@@ -179,6 +184,7 @@ span.q {
   .article-card {
     width: 80%;
     margin: 10%;
+    scroll-snap-align: center;
   }
 
   .article-title {

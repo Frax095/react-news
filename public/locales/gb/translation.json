@@ -1,0 +1,13 @@
+{
+  "title": "English",
+  "search": "Do a search",
+  "categories": {
+      "general": "General",
+      "sports": "Sports",
+      "business": "Business",
+      "entertainment": "Entertainment",
+      "health": "Health",
+      "science": "Science",
+      "technology": "Technology"
+  }
+}

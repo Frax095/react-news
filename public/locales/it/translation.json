@@ -1,0 +1,13 @@
+{
+    "title": "Italiano",
+    "search": "Fai una ricerca",
+    "categories": {
+        "general": "Tutte",
+        "sports": "Sport",
+        "business": "Business",
+        "entertainment": "Intrattenimento",
+        "health": "Salute",
+        "science": "Scienza",
+        "technology": "Tecnologia"
+    }
+}

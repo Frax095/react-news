@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react';
+import React, { Component, Suspense } from 'react';
 import logo from './assets/images/react-news.svg';
 import {useState, useEffect, useMemo, useRef} from 'react';
 import axios from 'axios';
@@ -7,16 +7,7 @@ import News from './news/news';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Loading from './components/loading';
 import useLocalStorage from 'react-use-localstorage';
-
-const categories = {
-  'general': 'Tutte',
-  'sports': 'Sport',
-  'business': 'Business',
-  'entertainment': 'Intrattenimento',
-  'health': 'Salute',
-  'science': 'Scienza',
-  'technology': 'Tecnologia'
-};
+import { useTranslation } from "react-i18next";
 
 const languages = {
   'gb' : 'english',
@@ -30,7 +21,16 @@ function Main() {
   const [delay, setDelay] = useState(0);
   const [news, setNews] = useState(0);
   const [lang, setLang] = useLocalStorage('lang', 'gb');
-
+  const { t, i18n } = useTranslation();
+  const categories = {
+    'general': t("categories.general"),
+    'sports': t("categories.sports"),
+    'business': t("categories.business"),
+    'entertainment': t("categories.entertainment"),
+    'health': t("categories.health"),
+    'science': t("categories.science"),
+    'technology': t("categories.technology")
+  };
   //con questo delay evitiamo che si accavallino più chiamate api
   //non venendo più chiamate ad ogni lettera digitata, ma da quando viene ditata
   //la prima lettera parte un timer di (in questo caso) 400ms
@@ -62,6 +62,7 @@ function Main() {
   }, [category]);
 
   function refreshPage(value) {
+    i18n.changeLanguage(value);
     setLang(value);
     setTimeout(function() {
       window.location.reload();
@@ -82,7 +83,7 @@ function Main() {
           type="text"
           value={q}
           onChange={e => setQ(e.target.value)}
-          placeholder="Fai una ricerca..."
+          placeholder={t("search")}
         />
         {Object.keys(categories).map(key => (
           <div onClick={() => setCategory(key)} className={`btn ${key === category ? 'active' : ''}`} key={key} to={`/${key}`}>{categories[key]}</div>
@@ -110,12 +111,14 @@ function Main() {
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo"/>
-      </header>
-      <Main />
-    </div>
+    <Suspense fallback="false">
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo"/>
+        </header>
+        <Main />
+      </div>
+    </Suspense>
   );
 }
 
